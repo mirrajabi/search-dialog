@@ -49,7 +49,7 @@ public class SimpleSearchFilter<T extends Searchable> extends Filter {
                 if (object.getTitle().toLowerCase().contains(filterSeq))
                     filter.add(object);
                 else if (mCheckLCS)
-                    if (StringHelper.lcs(object.getTitle(), filterSeq).length()
+                    if (StringsHelper.lcs(object.getTitle(), filterSeq).length()
                             > object.getTitle().length() * mAccuracyPercentage)
                         filter.add(object);
 

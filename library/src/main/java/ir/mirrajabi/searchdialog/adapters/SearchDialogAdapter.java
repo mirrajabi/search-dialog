@@ -14,7 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mirrajabi.searchdialog.StringHelper;
+import ir.mirrajabi.searchdialog.StringsHelper;
+import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
 import ir.mirrajabi.searchdialog.core.Searchable;
 
@@ -29,6 +30,7 @@ public class SearchDialogAdapter<T extends Searchable>
     private String mSearchTag;
     private boolean mHighlightPartsInCommon = true;
     private String mHighlightColor = "#FFED2E47";
+    private BaseSearchDialogCompat mSearchDialog;
 
     public SearchDialogAdapter(Context context, @LayoutRes int layout, List<T> items) {
         this(context,layout,null, items);
@@ -95,7 +97,7 @@ public class SearchDialogAdapter<T extends Searchable>
             mViewBinder.bind(holder, object, position);
         TextView text = holder.getViewById(android.R.id.text1);
         if(mSearchTag != null && mHighlightPartsInCommon)
-            text.setText(StringHelper.highlightLCS(object.getTitle(), getSearchTag(),
+            text.setText(StringsHelper.highlightLCS(object.getTitle(), getSearchTag(),
                     Color.parseColor(mHighlightColor)));
         else text.setText(object.getTitle());
 
@@ -103,7 +105,7 @@ public class SearchDialogAdapter<T extends Searchable>
             holder.getBaseView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mSearchResultListener.onSelected(object, position);
+                    mSearchResultListener.onSelected(mSearchDialog, object, position);
                 }
             });
     }
@@ -135,6 +137,11 @@ public class SearchDialogAdapter<T extends Searchable>
 
     public SearchDialogAdapter setHighlightColor(String highlightColor) {
         mHighlightColor = highlightColor;
+        return this;
+    }
+
+    public SearchDialogAdapter setSearchDialog(BaseSearchDialogCompat searchDialog) {
+        mSearchDialog = searchDialog;
         return this;
     }
 

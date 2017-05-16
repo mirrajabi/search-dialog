@@ -21,14 +21,14 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by MADNESS on 5/14/2017.
  */
 
-public class SearchDialogCompat<T extends Searchable> extends BaseSearchDialogCompat<T> {
+public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDialogCompat<T> {
     private String mTitle;
     private String mSearchHint;
     private SearchResultListener<T> mSearchResultListener;
 
-    public SearchDialogCompat(Context context, String title, String searchHint,
-                              @Nullable Filter filter, ArrayList<T> items,
-                              SearchResultListener<T> searchResultListener) {
+    public SimpleSearchDialogCompat(Context context, String title, String searchHint,
+                                    @Nullable Filter filter, ArrayList<T> items,
+                                    SearchResultListener<T> searchResultListener) {
         super(context, items, filter, null,null);
         init(title, searchHint, searchResultListener);
     }
@@ -52,6 +52,7 @@ public class SearchDialogCompat<T extends Searchable> extends BaseSearchDialogCo
         final SearchDialogAdapter adapter = new SearchDialogAdapter<>(getContext(),
                 android.R.layout.simple_list_item_1,getItems());
         adapter.setSearchResultListener(mSearchResultListener);
+        adapter.setSearchDialog(this);
         setFilterResultListener(new FilterResultListener<T>() {
             @Override
             public void onFilter(ArrayList<T> items) {
@@ -63,17 +64,17 @@ public class SearchDialogCompat<T extends Searchable> extends BaseSearchDialogCo
         setAdapter(adapter);
     }
 
-    public SearchDialogCompat setTitle(String title) {
+    public SimpleSearchDialogCompat setTitle(String title) {
         mTitle = title;
         return this;
     }
 
-    public SearchDialogCompat setSearchHint(String searchHint) {
+    public SimpleSearchDialogCompat setSearchHint(String searchHint) {
         mSearchHint = searchHint;
         return this;
     }
 
-    public SearchDialogCompat setSearchResultListener(
+    public SimpleSearchDialogCompat setSearchResultListener(
             SearchResultListener<T> searchResultListener) {
         mSearchResultListener = searchResultListener;
         return this;

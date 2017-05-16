@@ -7,7 +7,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ir.mirrajabi.searchdialog.SearchDialogCompat;
+import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat;
+import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
 import ir.mirrajabi.searchdialog.sample.models.SampleSearchModel;
 
@@ -21,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SearchDialogCompat(MainActivity.this, "Search...",
+                new SimpleSearchDialogCompat(MainActivity.this, "Search...",
                         "What are you looking for...?", null, createSampleData(),
                         new SearchResultListener<SampleSearchModel>() {
                             @Override
-                            public void onSelected(SampleSearchModel item, int position) {
+                            public void onSelected(BaseSearchDialogCompat dialog,
+                                                   SampleSearchModel item, int position) {
                                 Toast.makeText(MainActivity.this, item.getTitle(),
                                         Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                             }
                         }).show();
             }
@@ -41,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         items.add(new SampleSearchModel("Third item"));
         items.add(new SampleSearchModel("The ultimate item"));
         items.add(new SampleSearchModel("Last item"));
+        items.add(new SampleSearchModel("Lorem ipsum"));
+        items.add(new SampleSearchModel("Dolor sit"));
+        items.add(new SampleSearchModel("Some random word"));
+        items.add(new SampleSearchModel("guess who's back"));
         return items;
     }
 }
