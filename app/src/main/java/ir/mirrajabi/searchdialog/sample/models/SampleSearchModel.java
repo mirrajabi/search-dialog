@@ -1,6 +1,6 @@
-package ir.mirrajabi.searchdialog.sample;
+package ir.mirrajabi.searchdialog.sample.models;
 
-import ir.mirrajabi.searchdialog.Searchable;
+import ir.mirrajabi.searchdialog.core.Searchable;
 
 /**
  * Created by MADNESS on 5/16/2017.

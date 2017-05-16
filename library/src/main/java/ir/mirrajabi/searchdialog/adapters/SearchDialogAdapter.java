@@ -1,6 +1,7 @@
-package ir.mirrajabi.searchdialog.adapter;
+package ir.mirrajabi.searchdialog.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -13,8 +14,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mirrajabi.searchdialog.SearchResultListener;
-import ir.mirrajabi.searchdialog.Searchable;
+import ir.mirrajabi.searchdialog.StringHelper;
+import ir.mirrajabi.searchdialog.core.SearchResultListener;
+import ir.mirrajabi.searchdialog.core.Searchable;
 
 public class SearchDialogAdapter<T extends Searchable>
         extends RecyclerView.Adapter<SearchDialogAdapter.ViewHolder> {
@@ -24,6 +26,9 @@ public class SearchDialogAdapter<T extends Searchable>
     private int mLayout;
     private SearchResultListener mSearchResultListener;
     private AdapterViewBinder<T> mViewBinder;
+    private String mSearchTag;
+    private boolean mHighlightPartsInCommon = true;
+    private String mHighlightColor = "#FFED2E47";
 
     public SearchDialogAdapter(Context context, @LayoutRes int layout, List<T> items) {
         this(context,layout,null, items);
@@ -89,7 +94,11 @@ public class SearchDialogAdapter<T extends Searchable>
         if(mViewBinder != null)
             mViewBinder.bind(holder, object, position);
         TextView text = holder.getViewById(android.R.id.text1);
-        text.setText(object.getTitle());
+        if(mSearchTag != null && mHighlightPartsInCommon)
+            text.setText(StringHelper.highlightLCS(object.getTitle(), getSearchTag(),
+                    Color.parseColor(mHighlightColor)));
+        else text.setText(object.getTitle());
+
         if (mSearchResultListener != null)
             holder.getBaseView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,6 +113,29 @@ public class SearchDialogAdapter<T extends Searchable>
     }
     public void setSearchResultListener(SearchResultListener searchResultListener){
         this.mSearchResultListener = searchResultListener;
+    }
+
+    public SearchDialogAdapter setSearchTag(String searchTag) {
+        mSearchTag = searchTag;
+        return this;
+    }
+
+    public String getSearchTag() {
+        return mSearchTag;
+    }
+
+    public SearchDialogAdapter setHighlightPartsInCommon(boolean highlightPartsInCommon) {
+        mHighlightPartsInCommon = highlightPartsInCommon;
+        return this;
+    }
+
+    public boolean isHighlightPartsInCommon() {
+        return mHighlightPartsInCommon;
+    }
+
+    public SearchDialogAdapter setHighlightColor(String highlightColor) {
+        mHighlightColor = highlightColor;
+        return this;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

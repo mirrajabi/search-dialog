@@ -1,4 +1,4 @@
-package ir.mirrajabi.searchdialog;
+package ir.mirrajabi.searchdialog.core;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package ir.mirrajabi.searchdialog;
+package ir.mirrajabi.searchdialog.core;
 
 /**
  * Created by MADNESS on 5/15/2017.

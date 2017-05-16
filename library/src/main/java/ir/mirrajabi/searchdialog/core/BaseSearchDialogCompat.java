@@ -1,4 +1,4 @@
-package ir.mirrajabi.searchdialog;
+package ir.mirrajabi.searchdialog.core;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,11 +16,14 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import java.util.ArrayList;
+
+import ir.mirrajabi.searchdialog.SimpleSearchFilter;
+
 /**
  * Created by MADNESS on 5/14/2017.
  */
 
-public abstract class BaseSearchDialogCompat<T> extends AppCompatDialog implements Filterable {
+public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCompatDialog implements Filterable {
     private Filter mFilter;
     private ArrayList<T> mItems;
     private RecyclerView.Adapter mAdapter;
@@ -90,7 +93,7 @@ public abstract class BaseSearchDialogCompat<T> extends AppCompatDialog implemen
     @Override
     public Filter getFilter() {
         if (mFilter == null)
-            mFilter = new SearchFilter(mItems, mFilterResultListener);
+            mFilter = new SimpleSearchFilter<>(mItems, mFilterResultListener, true, 0.33f);
         return mFilter;
     }
 

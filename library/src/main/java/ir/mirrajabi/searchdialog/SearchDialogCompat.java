@@ -11,7 +11,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ir.mirrajabi.searchdialog.adapter.SearchDialogAdapter;
+import ir.mirrajabi.searchdialog.adapters.SearchDialogAdapter;
+import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
+import ir.mirrajabi.searchdialog.core.FilterResultListener;
+import ir.mirrajabi.searchdialog.core.SearchResultListener;
+import ir.mirrajabi.searchdialog.core.Searchable;
 
 /**
  * Created by MADNESS on 5/14/2017.
@@ -42,7 +46,7 @@ public class SearchDialogCompat<T extends Searchable> extends BaseSearchDialogCo
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         setCancelable(true);
         TextView txtTitle = (TextView) view.findViewById(R.id.txt_title);
-        EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
+        final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
         txtTitle.setText(mTitle);
         searchBox.setHint(mSearchHint);
         final SearchDialogAdapter adapter = new SearchDialogAdapter<>(getContext(),
@@ -51,10 +55,28 @@ public class SearchDialogCompat<T extends Searchable> extends BaseSearchDialogCo
         setFilterResultListener(new FilterResultListener<T>() {
             @Override
             public void onFilter(ArrayList<T> items) {
-                ((SearchDialogAdapter)getAdapter()).setItems(items);
+                ((SearchDialogAdapter)getAdapter())
+                        .setSearchTag(searchBox.getText().toString())
+                        .setItems(items);
             }
         });
         setAdapter(adapter);
+    }
+
+    public SearchDialogCompat setTitle(String title) {
+        mTitle = title;
+        return this;
+    }
+
+    public SearchDialogCompat setSearchHint(String searchHint) {
+        mSearchHint = searchHint;
+        return this;
+    }
+
+    public SearchDialogCompat setSearchResultListener(
+            SearchResultListener<T> searchResultListener) {
+        mSearchResultListener = searchResultListener;
+        return this;
     }
 
     @LayoutRes

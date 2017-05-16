@@ -6,16 +6,33 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mirrajabi.searchdialog.core.FilterResultListener;
+import ir.mirrajabi.searchdialog.core.Searchable;
+
 /**
  * Created by MADNESS on 5/14/2017.
  */
 
-public class SearchFilter<T extends Searchable> extends Filter {
+public class SimpleSearchFilter<T extends Searchable> extends Filter {
     private ArrayList<T> mItems;
     private FilterResultListener mFilterResultListener;
+    private boolean mCheckLCS;
+    private final float mAccuracyPercentage;
 
-    public SearchFilter(List<T> objects, @NonNull FilterResultListener filterResultListener) {
+    public SimpleSearchFilter(List<T> objects, @NonNull FilterResultListener filterResultListener,
+                              boolean checkLCS, float accuracyPercentage) {
         mFilterResultListener = filterResultListener;
+        mCheckLCS = checkLCS;
+        mAccuracyPercentage = accuracyPercentage;
+        mItems = new ArrayList<>();
+        synchronized (this) {
+            mItems.addAll(objects);
+        }
+    }
+    public SimpleSearchFilter(List<T> objects, @NonNull FilterResultListener filterResultListener) {
+        mFilterResultListener = filterResultListener;
+        mCheckLCS = false;
+        mAccuracyPercentage = 0;
         mItems = new ArrayList<>();
         synchronized (this) {
             mItems.addAll(objects);
@@ -31,6 +48,10 @@ public class SearchFilter<T extends Searchable> extends Filter {
             for (T object : mItems)
                 if (object.getTitle().toLowerCase().contains(filterSeq))
                     filter.add(object);
+                else if (mCheckLCS)
+                    if (StringHelper.lcs(object.getTitle(), filterSeq).length()
+                            > object.getTitle().length() * mAccuracyPercentage)
+                        filter.add(object);
 
             result.values = filter;
             result.count = filter.size();
