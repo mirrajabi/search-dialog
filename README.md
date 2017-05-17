@@ -86,6 +86,11 @@ SimpleSearchDialogCompat(Context context, String title, String searchHint,
 ```
 
 ## Advanced usage
+### The layout
+I used [this layout](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/res/layout/search_dialog_compat.xml) for simple search dialog but you can use anything else.
+Of course your layout should have thse two views :
+- An EditText to use as search key input
+- A RecyclerView for showing the results in it
 ### The search dialog
 You can use your custom layouts, adapters and search options by creating a class inheriting the [BaseSearchDialogCompat](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/java/ir/mirrajabi/searchdialog/core/BaseSearchDialogCompat.java)
 take a look at [SimpleSearchDialogCompat](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/java/ir/mirrajabi/searchdialog/SimpleSearchDialogCompat.java) to see an example of how it can be done
