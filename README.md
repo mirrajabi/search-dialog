@@ -2,7 +2,7 @@
 [![](https://jitpack.io/v/mirrajabi/search-dialog.svg)](https://jitpack.io/#mirrajabi/search-dialog)
 
 An awesome and customizable search dialog with built-in search options.
-### [View Appetize demo here](https://appetize.io/app/0zrak85r8qa1nv7t3tge2td418?device=nexus5&scale=75&orientation=portrait&osVersion=7.0)
+### [View Appetize demo here](https://appetize.io/app/ugwkp16k61u2tcb5qbcca2vatc?device=nexus5&scale=75&orientation=portrait&osVersion=7.0)
 
 ![search_dialog](https://cloud.githubusercontent.com/assets/8886687/26155004/fc0ee574-3b26-11e7-9bb8-973eaa5d26f6.jpg)
 
