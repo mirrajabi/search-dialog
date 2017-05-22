@@ -6,10 +6,10 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by MADNESS on 5/16/2017.
  */
 
-public class SampleSearchModel implements Searchable {
+public class SampleModel implements Searchable {
     private String mTitle;
 
-    public SampleSearchModel(String title) {
+    public SampleModel(String title) {
         mTitle = title;
     }
 
@@ -18,7 +18,7 @@ public class SampleSearchModel implements Searchable {
         return mTitle;
     }
 
-    public SampleSearchModel setTitle(String title) {
+    public SampleModel setTitle(String title) {
         mTitle = title;
         return this;
     }
