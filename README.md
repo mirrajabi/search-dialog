@@ -4,7 +4,7 @@
 An awesome and customizable search dialog with built-in search options.
 ### [View Appetize demo here](https://appetize.io/app/ugwkp16k61u2tcb5qbcca2vatc?device=nexus5&scale=75&orientation=portrait&osVersion=7.0)
 
-![search_dialog](https://cloud.githubusercontent.com/assets/8886687/26155004/fc0ee574-3b26-11e7-9bb8-973eaa5d26f6.jpg)
+![search_dialog](https://cloud.githubusercontent.com/assets/8886687/26310184/29ed07a4-3f15-11e7-8a07-717dc31fa0b3.jpg)
 
 ### Usage
 First add jitpack to your projects build.gradle file
