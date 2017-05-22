@@ -127,3 +127,10 @@ SpannableStringBuilder highlightLCS(String text1, String text2, int highlightCol
 // Returns the LCS(Longest Common Subsequence) of two strings
 String lcs(String text1, String text2) 
 ```
+
+
+#### See the [sample app](https://github.com/mirrajabi/search-dialog/tree/master/app) to get a better understanding of the advanced usage
+
+### Used in sample app
+- [Circle-ImageView](https://github.com/hdodenhof/CircleImageView)
+- [Glide](https://github.com/bumptech/glide)
