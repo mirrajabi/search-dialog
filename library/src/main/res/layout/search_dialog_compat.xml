@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top"
     android:padding="20dp">
+    <View
+        android:id="@+id/dummy_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/drw_rectangle_popup_bg"
         android:orientation="vertical">
 
@@ -65,4 +71,4 @@
             android:fadingEdgeLength="4dp"
             android:requiresFadingEdge="vertical"/>
     </LinearLayout>
-</RelativeLayout>
+</FrameLayout>

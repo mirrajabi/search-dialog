@@ -49,6 +49,13 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
         final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
         txtTitle.setText(mTitle);
         searchBox.setHint(mSearchHint);
+        view.findViewById(R.id.dummy_background)
+                .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
         final SearchDialogAdapter adapter = new SearchDialogAdapter<>(getContext(),
                 android.R.layout.simple_list_item_1,getItems());
         adapter.setSearchResultListener(mSearchResultListener);

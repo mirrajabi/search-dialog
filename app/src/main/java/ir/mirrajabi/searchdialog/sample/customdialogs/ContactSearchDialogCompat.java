@@ -50,6 +50,13 @@ public class ContactSearchDialogCompat<T extends Searchable> extends BaseSearchD
         final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
         txtTitle.setText(mTitle);
         searchBox.setHint(mSearchHint);
+        view.findViewById(ir.mirrajabi.searchdialog.R.id.dummy_background)
+                .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
         final ContactModelAdapter adapter = new ContactModelAdapter<>(getContext(),
                 R.layout.image_adapter_item,getItems());
         adapter.setSearchResultListener(mSearchResultListener);
