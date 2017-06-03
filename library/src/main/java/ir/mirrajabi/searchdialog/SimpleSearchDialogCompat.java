@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +27,11 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
     private String mTitle;
     private String mSearchHint;
     private SearchResultListener<T> mSearchResultListener;
+
+    private TextView mTxtTitle;
+    private EditText mSearchBox;
+    private RecyclerView mRecyclerView;
+    private ProgressBar mProgressBar;
 
     public SimpleSearchDialogCompat(Context context, String title, String searchHint,
                                     @Nullable Filter filter, ArrayList<T> items,
@@ -45,10 +52,14 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
         setContentView(view);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         setCancelable(true);
-        TextView txtTitle = (TextView) view.findViewById(R.id.txt_title);
-        final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
-        txtTitle.setText(mTitle);
-        searchBox.setHint(mSearchHint);
+        mTxtTitle = (TextView) view.findViewById(R.id.txt_title);
+        mSearchBox = (EditText) view.findViewById(getSearchBoxId());
+        mRecyclerView = (RecyclerView) view.findViewById(getRecyclerViewId());
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
+        mTxtTitle.setText(mTitle);
+        mSearchBox.setHint(mSearchHint);
+        mProgressBar.setIndeterminate(true);
+        mProgressBar.setVisibility(View.GONE);
         view.findViewById(R.id.dummy_background)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +75,7 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
             @Override
             public void onFilter(ArrayList<T> items) {
                 ((SearchDialogAdapter)getAdapter())
-                        .setSearchTag(searchBox.getText().toString())
+                        .setSearchTag(mSearchBox.getText().toString())
                         .setItems(items);
             }
         });
@@ -73,12 +84,23 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 
     public SimpleSearchDialogCompat setTitle(String title) {
         mTitle = title;
+        if(mTxtTitle != null)
+            mTxtTitle.setText(mTitle);
         return this;
     }
 
     public SimpleSearchDialogCompat setSearchHint(String searchHint) {
         mSearchHint = searchHint;
+        if(mSearchBox != null)
+            mSearchBox.setHint(mSearchHint);
         return this;
+    }
+
+    public void setLoading(boolean isLoading){
+        if(mProgressBar != null)
+            mProgressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        if(mRecyclerView != null)
+            mRecyclerView.setVisibility(!isLoading ? View.VISIBLE : View.GONE);
     }
 
     public SimpleSearchDialogCompat setSearchResultListener(
