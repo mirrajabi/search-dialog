@@ -66,7 +66,9 @@ public class SearchDialogAdapter<T extends Searchable>
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        if (mItems != null)
+            return mItems.size();
+        else return 0;
     }
 
     @Override

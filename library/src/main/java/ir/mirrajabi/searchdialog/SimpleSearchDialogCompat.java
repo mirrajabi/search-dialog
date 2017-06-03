@@ -1,6 +1,7 @@
 package ir.mirrajabi.searchdialog;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -14,8 +15,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ir.mirrajabi.searchdialog.adapters.SearchDialogAdapter;
+import ir.mirrajabi.searchdialog.core.BaseFilter;
 import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.FilterResultListener;
+import ir.mirrajabi.searchdialog.core.OnPerformFilterListener;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
 import ir.mirrajabi.searchdialog.core.Searchable;
 
@@ -33,6 +36,10 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
 
+    // In case you are doing process in another thread
+    // and wanted to update the progress in that thread
+    private Handler mHandler;
+
     public SimpleSearchDialogCompat(Context context, String title, String searchHint,
                                     @Nullable Filter filter, ArrayList<T> items,
                                     SearchResultListener<T> searchResultListener) {
@@ -45,6 +52,15 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
         mTitle = title;
         mSearchHint = searchHint;
         mSearchResultListener = searchResultListener;
+        setFilterResultListener(new FilterResultListener<T>() {
+            @Override
+            public void onFilter(ArrayList<T> items) {
+                ((SearchDialogAdapter)getAdapter())
+                        .setSearchTag(mSearchBox.getText().toString())
+                        .setItems(items);
+            }
+        });
+        mHandler = new Handler();
     }
 
     @Override
@@ -71,36 +87,56 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
                 android.R.layout.simple_list_item_1,getItems());
         adapter.setSearchResultListener(mSearchResultListener);
         adapter.setSearchDialog(this);
-        setFilterResultListener(new FilterResultListener<T>() {
+        setFilterResultListener(getFilterResultListener());
+        setAdapter(adapter);
+        mSearchBox.requestFocus();
+        ((BaseFilter<T>)getFilter()).setOnPerformFilterListener(new OnPerformFilterListener() {
             @Override
-            public void onFilter(ArrayList<T> items) {
-                ((SearchDialogAdapter)getAdapter())
-                        .setSearchTag(mSearchBox.getText().toString())
-                        .setItems(items);
+            public void doBeforeFiltering() {
+                setLoading(true);
+            }
+
+            @Override
+            public void doAfterFiltering() {
+                setLoading(false);
             }
         });
-        setAdapter(adapter);
     }
 
     public SimpleSearchDialogCompat setTitle(String title) {
         mTitle = title;
         if(mTxtTitle != null)
-            mTxtTitle.setText(mTitle);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTxtTitle.setText(mTitle);
+                }
+            });
         return this;
     }
 
     public SimpleSearchDialogCompat setSearchHint(String searchHint) {
         mSearchHint = searchHint;
         if(mSearchBox != null)
-            mSearchBox.setHint(mSearchHint);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSearchBox.setHint(mSearchHint);
+                }
+            });
         return this;
     }
 
-    public void setLoading(boolean isLoading){
-        if(mProgressBar != null)
-            mProgressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-        if(mRecyclerView != null)
-            mRecyclerView.setVisibility(!isLoading ? View.VISIBLE : View.GONE);
+    public void setLoading(final boolean isLoading) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mProgressBar != null)
+                    mRecyclerView.setVisibility(!isLoading ? View.VISIBLE : View.GONE);
+                if (mRecyclerView != null)
+                    mProgressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
     public SimpleSearchDialogCompat setSearchResultListener(
