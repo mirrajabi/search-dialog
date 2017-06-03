@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         };
         searchDialog.setFilter(apiFilter);
         searchDialog.show();
-        searchDialog.setSearchHint("SSSSsss");
     }
 
     private ArrayList<SampleModel> createSampleData(){
