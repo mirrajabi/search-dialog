@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="top"
     android:padding="20dp">
+
     <View
         android:id="@+id/dummy_background"
         android:layout_width="match_parent"
@@ -13,8 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/drw_rectangle_popup_bg"
         android:orientation="vertical">
 
@@ -25,10 +26,10 @@
             android:layout_marginLeft="12dp"
             android:lines="1"
             android:maxLines="1"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:paddingRight="12dp"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +45,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="12dp"
-                android:textSize="14sp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:textSize="14sp"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="24dp"
@@ -61,6 +62,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#eaeaea"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_items"
