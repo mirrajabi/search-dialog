@@ -69,7 +69,6 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mOnPerformFilterListener.doBeforeFiltering();
             }
 
             @Override
@@ -79,7 +78,6 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mOnPerformFilterListener.doBeforeFiltering();
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),

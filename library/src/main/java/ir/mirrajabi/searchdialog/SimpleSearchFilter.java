@@ -1,11 +1,11 @@
 package ir.mirrajabi.searchdialog;
 
 import android.support.annotation.NonNull;
-import android.widget.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mirrajabi.searchdialog.core.BaseFilter;
 import ir.mirrajabi.searchdialog.core.FilterResultListener;
 import ir.mirrajabi.searchdialog.core.Searchable;
 
@@ -13,7 +13,7 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by MADNESS on 5/14/2017.
  */
 
-public class SimpleSearchFilter<T extends Searchable> extends Filter {
+public class SimpleSearchFilter<T extends Searchable> extends BaseFilter {
     private ArrayList<T> mItems;
     private FilterResultListener mFilterResultListener;
     private boolean mCheckLCS;
@@ -29,12 +29,14 @@ public class SimpleSearchFilter<T extends Searchable> extends Filter {
             mItems.addAll(objects);
         }
     }
+
     public SimpleSearchFilter(List<T> objects, @NonNull FilterResultListener filterResultListener) {
         this(objects, filterResultListener, false, 0);
     }
 
     @Override
     protected FilterResults performFiltering(CharSequence chars) {
+        doBeforeFiltering();
         String filterSeq = chars.toString().toLowerCase();
         FilterResults result = new FilterResults();
         if (filterSeq != null && filterSeq.length() > 0) {
@@ -62,5 +64,6 @@ public class SimpleSearchFilter<T extends Searchable> extends Filter {
     protected void publishResults(CharSequence constraint, FilterResults results) {
         ArrayList<T> filtered = (ArrayList<T>) results.values;
         mFilterResultListener.onFilter(filtered);
+        doAfterFiltering();
     }
 }
