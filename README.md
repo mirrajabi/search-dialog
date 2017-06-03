@@ -4,7 +4,7 @@
 An awesome and customizable search dialog with built-in search options.
 ### [View Appetize demo here](https://appetize.io/app/ugwkp16k61u2tcb5qbcca2vatc?device=nexus5&scale=75&orientation=portrait&osVersion=7.0)
 
-![search_dialog](https://cloud.githubusercontent.com/assets/8886687/26310184/29ed07a4-3f15-11e7-8a07-717dc31fa0b3.jpg)
+![search_dialog](https://cloud.githubusercontent.com/assets/8886687/26755439/869f9e6c-48a2-11e7-9e6c-829b573e7730.jpg)
 
 ### Usage
 First add jitpack to your projects build.gradle file
@@ -19,7 +19,7 @@ allprojects {
 Then add the dependency in modules build.gradle file
 ```groovy
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.0'
+    compile 'com.github.mirrajabi:search-dialog:1.1'
 }
 ```
 
@@ -85,6 +85,9 @@ SimpleSearchDialogCompat(Context context, String title, String searchHint,
                                     SearchResultListener<T> searchResultListener)
 ```
 
+### Loading view(added to [SimpleSearchDialogCompat](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/java/ir/mirrajabi/searchdialog/SimpleSearchDialogCompat.java) in [v1.1](https://github.com/mirrajabi/search-dialog/releases/tag/1.1))
+Just use `setLoading(true)` for showing and `setLoading(false)` for hiding it on an instance of [SimpleSearchDialogCompat](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/java/ir/mirrajabi/searchdialog/SimpleSearchDialogCompat.java)
+
 ## Advanced usage
 ### The layout
 I used [this layout](https://github.com/mirrajabi/search-dialog/blob/master/library/src/main/res/layout/search_dialog_compat.xml) for simple search dialog but you can use anything else.
@@ -132,5 +135,13 @@ String lcs(String text1, String text2)
 #### See the [sample app](https://github.com/mirrajabi/search-dialog/tree/master/app) to get a better understanding of the advanced usage
 
 ### Used in sample app
-- [Circle-ImageView](https://github.com/hdodenhof/CircleImageView)
+- [Okhttp](https://github.com/square/okhttp)
+- [OkhttpJsonMock](https://github.com/mirrajabi/okhttp-json-mock)
+- [Retrofit](http://github.com/square/retrofit)
+- [ButterKnife](https://github.com/JakeWharton/butterknife)
 - [Glide](https://github.com/bumptech/glide)
+- [Circle-ImageView](https://github.com/hdodenhof/CircleImageView)
+- [RandomUser](https://randomuser.me)'s fake api for sample images 
+
+### Changelog
+1.1 - `Adds loading feature.`
