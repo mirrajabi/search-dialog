@@ -30,13 +30,7 @@ public class SimpleSearchFilter<T extends Searchable> extends Filter {
         }
     }
     public SimpleSearchFilter(List<T> objects, @NonNull FilterResultListener filterResultListener) {
-        mFilterResultListener = filterResultListener;
-        mCheckLCS = false;
-        mAccuracyPercentage = 0;
-        mItems = new ArrayList<>();
-        synchronized (this) {
-            mItems.addAll(objects);
-        }
+        this(objects, filterResultListener, false, 0);
     }
 
     @Override
