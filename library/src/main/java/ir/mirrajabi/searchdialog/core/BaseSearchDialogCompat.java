@@ -28,6 +28,7 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
     private ArrayList<T> mItems;
     private RecyclerView.Adapter mAdapter;
     private FilterResultListener<T> mFilterResultListener;
+    private OnPerformFilterListener mOnPerformFilterListener;
 
     public BaseSearchDialogCompat(Context context, ArrayList<T> items, Filter filter,
                                   RecyclerView.Adapter adapter,
@@ -68,7 +69,7 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                mOnPerformFilterListener.doBeforeFiltering();
             }
 
             @Override
@@ -78,6 +79,7 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
 
             @Override
             public void afterTextChanged(Editable editable) {
+                mOnPerformFilterListener.doBeforeFiltering();
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
@@ -127,5 +129,14 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
     public BaseSearchDialogCompat setFilterResultListener(FilterResultListener<T> filterResultListener) {
         mFilterResultListener = filterResultListener;
         return this;
+    }
+
+    public BaseSearchDialogCompat setOnPerformFilterListener(OnPerformFilterListener onPerformFilterListener) {
+        mOnPerformFilterListener = onPerformFilterListener;
+        return this;
+    }
+
+    public OnPerformFilterListener getOnPerformFilterListener() {
+        return mOnPerformFilterListener;
     }
 }
