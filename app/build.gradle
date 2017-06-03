@@ -22,6 +22,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.android.support:support-annotations:25.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.mirrajabi:okhttp-json-mock:1.0'
 }
