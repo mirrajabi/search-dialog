@@ -18,7 +18,7 @@ allprojects {
 Then add the dependency in modules build.gradle file
 ```groovy
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.1'
+    compile 'com.github.mirrajabi:search-dialog:1.1.1'
 }
 ```
 
