@@ -29,6 +29,7 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
     private RecyclerView.Adapter mAdapter;
     private FilterResultListener<T> mFilterResultListener;
     private OnPerformFilterListener mOnPerformFilterListener;
+    protected boolean mFilterAutomatically;
 
     public BaseSearchDialogCompat(Context context, ArrayList<T> items, Filter filter,
                                   RecyclerView.Adapter adapter,
@@ -73,7 +74,8 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                getFilter().filter(charSequence);
+                if(isFilterAutomatically())
+                    getFilter().filter(charSequence);
             }
 
             @Override
@@ -136,5 +138,14 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
 
     public OnPerformFilterListener getOnPerformFilterListener() {
         return mOnPerformFilterListener;
+    }
+
+    public boolean isFilterAutomatically() {
+        return mFilterAutomatically;
+    }
+
+    public BaseSearchDialogCompat setFilterAutomatically(boolean filterAutomatically) {
+        mFilterAutomatically = filterAutomatically;
+        return this;
     }
 }

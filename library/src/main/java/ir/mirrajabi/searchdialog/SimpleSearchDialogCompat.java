@@ -162,4 +162,20 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
     protected int getRecyclerViewId() {
         return R.id.rv_items;
     }
+
+    public EditText getSearchBox() {
+        return mSearchBox;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
+    }
 }

@@ -1,7 +1,9 @@
 package ir.mirrajabi.searchdialog.sample;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.button)
     void provideSimpleDialog(){
-        new SimpleSearchDialogCompat(MainActivity.this, "Search...",
+        SimpleSearchDialogCompat dialog = new SimpleSearchDialogCompat(MainActivity.this, "Search...",
                 "What are you looking for...?", null, createSampleData(),
                 new SearchResultListener<SampleModel>() {
                     @Override
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
-                }).show();
+                });
+        dialog.show();
+        dialog.getSearchBox().setTypeface(Typeface.SERIF);
     }
 
     @OnClick(R.id.button2)
