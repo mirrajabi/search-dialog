@@ -18,7 +18,7 @@ allprojects {
 Then add the dependency in modules build.gradle file
 ```groovy
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.1.1'
+    compile 'com.github.mirrajabi:search-dialog:1.2'
 }
 ```
 
@@ -143,4 +143,6 @@ String lcs(String text1, String text2)
 - [RandomUser](https://randomuser.me)'s fake api for sample images 
 
 ### Changelog
+1.2 - `Adds getter for views in simple search dialog and an option to turn off the auto filtering on search edittext.`
+1.1.1 - `Fixes drawable overriding issue.`
 1.1 - `Adds loading feature.`
