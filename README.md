@@ -144,5 +144,7 @@ String lcs(String text1, String text2)
 
 ### Changelog
 1.2 - `Adds getter for views in simple search dialog and an option to turn off the auto filtering on search edittext.`
+
 1.1.1 - `Fixes drawable overriding issue.`
+
 1.1 - `Adds loading feature.`
