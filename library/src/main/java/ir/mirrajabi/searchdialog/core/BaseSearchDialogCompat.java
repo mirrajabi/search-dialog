@@ -29,7 +29,7 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
     private RecyclerView.Adapter mAdapter;
     private FilterResultListener<T> mFilterResultListener;
     private OnPerformFilterListener mOnPerformFilterListener;
-    protected boolean mFilterAutomatically;
+    protected boolean mFilterAutomatically = true;
 
     public BaseSearchDialogCompat(Context context, ArrayList<T> items, Filter filter,
                                   RecyclerView.Adapter adapter,
