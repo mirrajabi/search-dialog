@@ -1,7 +1,8 @@
 package ir.mirrajabi.searchdialog.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mirrajabi.searchdialog.R;
 import ir.mirrajabi.searchdialog.StringsHelper;
 import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
@@ -29,7 +31,7 @@ public class SearchDialogAdapter<T extends Searchable>
     private AdapterViewBinder<T> mViewBinder;
     private String mSearchTag;
     private boolean mHighlightPartsInCommon = true;
-    private String mHighlightColor = "#FFED2E47";
+
     private BaseSearchDialogCompat mSearchDialog;
 
     public SearchDialogAdapter(Context context, @LayoutRes int layout, List<T> items) {
@@ -93,14 +95,15 @@ public class SearchDialogAdapter<T extends Searchable>
     public void onBindViewHolder(SearchDialogAdapter.ViewHolder holder, int position) {
         initializeViews(getItem(position), holder, position);
     }
-    private void initializeViews(final T object, final SearchDialogAdapter.ViewHolder holder,
+    private void initializeViews(final T object, final ViewHolder holder,
                                  final int position) {
         if(mViewBinder != null)
             mViewBinder.bind(holder, object, position);
         TextView text = holder.getViewById(android.R.id.text1);
+        text.setTextColor(getColor(R.color.searchDialogResultColor));
         if(mSearchTag != null && mHighlightPartsInCommon)
             text.setText(StringsHelper.highlightLCS(object.getTitle(), getSearchTag(),
-                    Color.parseColor(mHighlightColor)));
+                    getColor(R.color.searchDialogResultHighlightColor)));
         else text.setText(object.getTitle());
 
         if (mSearchResultListener != null)
@@ -137,14 +140,15 @@ public class SearchDialogAdapter<T extends Searchable>
         return mHighlightPartsInCommon;
     }
 
-    public SearchDialogAdapter setHighlightColor(String highlightColor) {
-        mHighlightColor = highlightColor;
-        return this;
-    }
-
     public SearchDialogAdapter setSearchDialog(BaseSearchDialogCompat searchDialog) {
         mSearchDialog = searchDialog;
         return this;
+    }
+
+    private int getColor(@ColorRes int colorResId){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return mContext.getResources().getColor(colorResId, null);
+        } else return mContext.getResources().getColor(colorResId);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
