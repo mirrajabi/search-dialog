@@ -22,7 +22,7 @@ Then add the dependency in modules build.gradle file
 
 ```gradle
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.2'
+    compile 'com.github.mirrajabi:search-dialog:1.2.1'
 }
 ```
 
