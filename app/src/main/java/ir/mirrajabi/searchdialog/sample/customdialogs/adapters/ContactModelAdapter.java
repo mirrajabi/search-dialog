@@ -179,7 +179,7 @@ public class ContactModelAdapter<T extends Searchable>
             mBaseView.findViewById(id).clearAnimation();
         }
     }
-    
+
     public interface AdapterViewBinder<T> {
         void bind(ViewHolder holder, T item, int position);
     }

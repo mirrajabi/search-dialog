@@ -22,7 +22,7 @@ Then add the dependency in modules build.gradle file
 
 ```gradle
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.2.1'
+    compile 'com.github.mirrajabi:search-dialog:1.2.2'
 }
 ```
 
@@ -174,6 +174,8 @@ String lcs(String text1, String text2)
 - [RandomUser](https://randomuser.me)'s fake api for sample images 
 
 ### Changelog
+
+1.2.2 - `Gradle tools version and dependencies were updated`
 
 1.2.1 - `Adds an option for changing text color and highlight color of default adapter.`
 
