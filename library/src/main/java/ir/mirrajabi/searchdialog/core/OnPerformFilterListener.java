@@ -5,6 +5,7 @@ package ir.mirrajabi.searchdialog.core;
  */
 
 public interface OnPerformFilterListener {
-    void doBeforeFiltering();
-    void doAfterFiltering();
+	void doBeforeFiltering();
+	
+	void doAfterFiltering();
 }
