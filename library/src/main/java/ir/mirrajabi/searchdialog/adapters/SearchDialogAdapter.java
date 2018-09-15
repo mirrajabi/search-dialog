@@ -161,6 +161,7 @@ public class SearchDialogAdapter<T extends Searchable>
 		return this;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private int getColor(@ColorRes int colorResId) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			return mContext.getResources().getColor(colorResId, null);
