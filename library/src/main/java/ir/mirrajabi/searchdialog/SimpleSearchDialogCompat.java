@@ -189,4 +189,8 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 	public ProgressBar getProgressBar() {
 		return mProgressBar;
 	}
+	
+	public TextView getTitleTextView() {
+		return mTxtTitle;
+	}
 }
