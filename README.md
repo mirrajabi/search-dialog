@@ -22,7 +22,7 @@ Then add the dependency in modules build.gradle file
 
 ```gradle
 dependencies {
-    compile 'com.github.mirrajabi:search-dialog:1.2.2'
+    compile 'com.github.mirrajabi:search-dialog:1.2.3'
 }
 ```
 
@@ -174,6 +174,8 @@ String lcs(String text1, String text2)
 - [RandomUser](https://randomuser.me)'s fake api for sample images 
 
 ### Changelog
+
+1.2.3 - `Changed minSdkVersion to 14. Added getter for the title textview of simple search dialog. Improved results sorting.`
 
 1.2.2 - `Gradle tools version and dependencies were updated`
 
