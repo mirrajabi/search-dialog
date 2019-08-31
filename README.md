@@ -175,14 +175,16 @@ String lcs(String text1, String text2)
 
 ### Changelog
 
+1.2.4 - `Added an option to SimpleSearchDialogCompat so that the dialog cancellation on touching outside the dialog can be customized.`
+
 1.2.3 - `Changed minSdkVersion to 14. Added getter for the title textview of simple search dialog. Improved results sorting.`
 
-1.2.2 - `Gradle tools version and dependencies were updated`
+1.2.2 - `Gradle tools version and dependencies were updated.`
 
-1.2.1 - `Adds an option for changing text color and highlight color of default adapter.`
+1.2.1 - `Added an option for changing text color and highlight color of default adapter.`
 
-1.2 - `Adds getter for views in simple search dialog and an option to turn off the auto filtering on search edittext.`
+1.2 - `Added getter for views in simple search dialog and an option to turn off the auto filtering on search edittext.`
 
 1.1.1 - `Fixes drawable overriding issue.`
 
-1.1 - `Adds loading feature.`
+1.1 - `Added loading feature.`
