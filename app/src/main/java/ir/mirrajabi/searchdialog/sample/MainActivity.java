@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	@OnClick(R.id.button2)
-	void provide2CustomContactDialog() {
+	void provideCustomContactDialog() {
 		new ContactSearchDialogCompat<>(MainActivity.this, "Search...",
 			"What are you looking for...?", null, createSampleContacts(),
 			new SearchResultListener<ContactModel>() {

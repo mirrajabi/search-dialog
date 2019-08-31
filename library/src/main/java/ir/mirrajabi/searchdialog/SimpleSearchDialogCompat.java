@@ -36,6 +36,7 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 	private EditText mSearchBox;
 	private RecyclerView mRecyclerView;
 	private ProgressBar mProgressBar;
+	private boolean mCancelOnTouchOutside = true;
 	
 	// In case you are doing process in another thread
 	// and wanted to update the progress in that thread
@@ -73,10 +74,10 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 		setContentView(view);
 		getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 		setCancelable(true);
-		mTxtTitle = (TextView) view.findViewById(R.id.txt_title);
-		mSearchBox = (EditText) view.findViewById(getSearchBoxId());
-		mRecyclerView = (RecyclerView) view.findViewById(getRecyclerViewId());
-		mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
+		mTxtTitle = view.findViewById(R.id.txt_title);
+		mSearchBox = view.findViewById(getSearchBoxId());
+		mRecyclerView = view.findViewById(getRecyclerViewId());
+		mProgressBar = view.findViewById(R.id.progress);
 		mTxtTitle.setText(mTitle);
 		mSearchBox.setHint(mSearchHint);
 		mProgressBar.setIndeterminate(true);
@@ -85,7 +86,9 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 			.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					dismiss();
+					if (mCancelOnTouchOutside) {
+						dismiss();
+					}
 				}
 			});
 		final SearchDialogAdapter adapter = new SearchDialogAdapter<>(getContext(),
@@ -192,5 +195,13 @@ public class SimpleSearchDialogCompat<T extends Searchable> extends BaseSearchDi
 	
 	public TextView getTitleTextView() {
 		return mTxtTitle;
+	}
+	
+	public boolean willCancelOnTouchOutside() {
+		return mCancelOnTouchOutside;
+	}
+	
+	public void setCancelOnTouchOutside(boolean cancelOnTouchOutside) {
+		mCancelOnTouchOutside = cancelOnTouchOutside;
 	}
 }

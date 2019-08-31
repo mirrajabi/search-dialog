@@ -68,6 +68,8 @@ public abstract class BaseSearchDialogCompat<T extends Searchable> extends AppCo
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		setTitle(null);
+		
 		View view = LayoutInflater.from(getContext()).inflate(getLayoutResId(), null);
 		getView(view);
 		EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
