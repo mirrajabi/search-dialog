@@ -80,6 +80,7 @@ new SimpleSearchDialogCompat(MainActivity.this, "Search...",
                             @Override
                             public void onSelected(BaseSearchDialogCompat dialog,
                                                    SampleSearchModel item, int position) {
+                                // If filtering is enabled, [position] is the index of the item in the filtered result, not in the unfiltered source
                                 Toast.makeText(MainActivity.this, item.getTitle(),
                                         Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
